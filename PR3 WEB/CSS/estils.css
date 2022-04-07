@@ -1,0 +1,119 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+/* BARRA NAVEGACIO */
+
+.nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 1px solid lightblue ;
+}
+
+.logo img{
+    width: 130px;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.nav-links li{
+    list-style: none;
+}
+
+.nav-links a{
+    color: #4793c3;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.burger{
+    display: none;
+    cursor: pointer;
+}
+
+.burger div{
+    width: 35px;
+    height: 5px;
+    background-color: #4793c3;
+    margin: 5px;
+    transition: all 0.3s ease;
+} 
+
+/* BARRA NAVEGACO MOVIL TABLET */
+
+@media screen and (max-width:1024px) {
+    .nav-links{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    body{
+        overflow-x: hidden;
+    }
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 89vh;
+        top: 8vh;
+        background-color:white;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+    .burger{
+        display: block;
+    }
+}
+
+/* ANIMACACIO TRES BARRES */
+
+.nav-active{
+    transform: translateX(0%);
+}
+
+/* ANIMACIO MENU CADA COSA */
+
+@keyframes navLinkFade {
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1{
+    transform: rotate(-46deg) translate(-5px,6px);
+}
+
+.toggle .line2{
+    opacity: 0;
+}
+
+.toggle .line3{
+    transform: rotate(46deg) translate(-5px,-6px);
+}
