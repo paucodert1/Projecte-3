@@ -1,0 +1,486 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+/* BARRA NAVEGACIO */
+
+header{
+    position:static;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 1px solid lightblue ;
+}
+
+.logo img{
+    width: 130px;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.nav-links li{
+    list-style: none;
+}
+
+.nav-links a{
+    color: #4793c3;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.burger{
+    display: none;
+    cursor: pointer;
+}
+
+.burger div{
+    width: 35px;
+    height: 5px;
+    background-color: #4793c3;
+    margin: 5px;
+    transition: all 0.3s ease;
+} 
+
+/* MENU DESPLEGABLE DE USUARI */
+
+.dropbtn {
+    /* background-color: #4CAF50; */
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: rgb(200, 240, 255);
+  }
+
+/* BARRA NAVEGACO MOVIL TABLET */
+
+@media screen and (max-width:1024px) {
+    .nav-links{
+        width: 60%;
+        position: absolute;
+    }
+}
+
+@media screen and (max-width:768px) {
+    body{
+        overflow-x: hidden;
+    }
+    .nav-links{
+        position: absolute;
+        z-index: 10;
+        right: 0px;
+        height: 89vh;
+        top: 8vh;
+        background-color:white;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+    .burger{
+        display: block;
+    }
+}
+
+/* ANIMACACIO TRES BARRES */
+
+.nav-active{
+    transform: translateX(0%);
+}
+
+/* ANIMACIO MENU CADA COSA */
+
+@keyframes navLinkFade {
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1{
+    transform: rotate(-46deg) translate(-5px,6px);
+}
+
+.toggle .line2{
+    opacity: 0;
+}
+
+.toggle .line3{
+    transform: rotate(46deg) translate(-5px,-6px);
+}
+
+/* SOBRE NOSALTRES */
+
+.section{
+    width: 100%;
+}
+
+.section .container{
+    width: 80%;
+    display: block;
+    margin: 0px auto;
+    padding: 50px 0px;
+}
+
+.container .title{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.container .title h1{
+    text-transform: uppercase;
+    font-size: 35px;
+    color: #6091a1;
+}
+
+.container .title h1::after{
+    content:"";
+    height: 5px;
+    width: 100px;
+    background-color:rgb(89, 159, 177);
+    border-radius: 25px;
+    display: block;
+    margin:auto;
+}
+
+.content{
+    float: left;
+    width: 55%;
+}
+
+.image-section{
+    float:right;
+    width: 40%;
+}
+
+.image-section img{
+    width: 100%;
+    height:auto;
+}
+
+.content .article h3{
+    color: #9aafb4;
+    font-size: 17px;
+}
+
+.content .article p{
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: rgb(0, 0, 0);
+}
+
+.content .article .button{
+    margin-top: 50px;
+}
+
+.content .article .button a{
+    text-decoration: none;
+    padding: 8px 25px;
+    background-color: #6091a1;
+    border-radius: 40px;
+    color: #fff;
+}
+
+.content .article .button a:hover{
+    color: #fff;
+    background-color: rgb(85, 192, 192);
+    transition: 1s ease;
+}
+
+@media  screen and (max-width: 768px) {
+    .section .container{
+        width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .content{
+        float: none;
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+    .image-section{
+        float: none;
+        width: 100%;
+        margin-top: 50px;
+    }
+    .image-section img{
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+    .container .title h1{
+        text-align: center;
+        font-size: 30px;
+    }
+    .container .article .button{
+        text-align: center;
+    }
+    .container .article .button a{
+        padding: 6px 15px;
+        font-size: 16px;
+    }
+}
+
+/* BOTIGA PRODUCTES */
+
+
+
+.contenidor-botiga{
+    display: grid;
+    padding-top: 25px;
+    padding-left: 150px;
+    padding-right: 150px;
+    grid-template-columns: repeat(auto-fit,minmax(280px,auto));
+    gap: 2rem;
+}
+
+.contenidor-botiga .caixa{
+    position: relative;
+    padding: 10px;
+    border-radius: 0.5rem;
+    box-shadow: 1px 2px 4px rgb(15 54 55 / 10%);
+    background: white;
+    
+}
+
+.contenidor-botiga .caixa img{
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    object-position: center;
+    background: white;
+    border-radius: 0.5rem;
+}
+
+.contenidor-botiga .caixa h2{
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    background: white;
+}
+
+.contenidor-botiga .caixa span{
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.contenidor-botiga .caixa .bx{
+    position: absolute;
+    font-size: 20px;
+    bottom: 1rem;
+    right: 0.8rem;
+    padding: 10px;
+    font-size: 20px;
+    background: rgb(149, 189, 202);
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.contenidor-botiga .caixa .bx:hover{
+    background: rgb(171, 214, 230);
+
+}
+
+/* PEU DE PAGUINA */
+
+.footer{
+    object-position: bottom;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* background: black; */
+    height: auto;
+    width: 100vw;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 40px;
+    color: #9aafb4
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    background-color: rgb(47, 48, 48);
+    justify-content: center;
+    flex-direction: column;
+    border-top: 1px solid lightblue;
+}
+
+.footer-content h3{
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 89rem;
+}
+
+.footer-content p{
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 1rem 0 3rem 0; */
+}
+
+.socials li{
+    margin:  0 10px;
+}
+
+.socials a{
+    text-emphasis: none;
+    color: #9aafb4;
+}
+
+.socials a i{
+    font-size: 1.1rem;
+    transition: color .4 ease;
+}
+
+.socials a:hover i{
+    color: rgb(41, 100, 100);
+}
+
+.footer-bottom{
+    background-color: rgb(47, 48, 48);
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p{
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+    color: #9aafb4;
+}
+
+.footer-bottom span{
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+}
+
+/* BARRA NAVEGACO MOVIL TABLET */
+
+@media screen and (max-width:1024px) {
+    .footer{
+        padding-top: 100px;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .footer{
+        padding-top: 40px;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /* background: black; */
+        height: auto;
+        width: 100vw;
+        font-family: 'Poppins', sans-serif;
+        /* padding-top: 40px; */
+        color: #9aafb4;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
