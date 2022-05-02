@@ -271,15 +271,15 @@ insert into Curse_com value (4, "51515482D", 60);
 
 # Productes #
 
-insert into Productes value (1, "Salomon", "MAX 8", 50, default, default, default);
+insert into Productes value (1, "Salomon", "MAX 8", 50, default, 2, default);
 insert into Productes value (default, "Atomic", "REDSTER X5", 70, default, default, default);
-insert into Productes value (default, "Wedze", "BOOST 580", 40, default, default, default);
-insert into Productes value (default, "Salomon", "QUEST ACCESS 70", 20, default, default, default);
-insert into Productes value (default, "Fischer", "Travers TS", 50, default, default, default);
+insert into Productes value (default, "Wedze", "BOOST 580", 40, default, 1, default);
+insert into Productes value (default, "Salomon", "QUEST ACCESS 70", 20, default, 1, default);
+insert into Productes value (default, "Fischer", "Travers TS", 50, default, 2, default);
 insert into Productes value (default, "Wedze", "WID 300", 15, default, default, default);
-insert into Productes value (default, "Kerma", "Elite 2", 15, default, default, default);
+insert into Productes value (default, "Kerma", "Elite 2", 15, default, 2, default);
 insert into Productes value (default, "Inovik", "POLE 900", 20, default, default, default);
-insert into Productes value (default, "Wedze", "BOOST 500", 10, default, default, default);
+insert into Productes value (default, "Wedze", "BOOST 500", 10, default, 1, default);
 
 	# Esquís #
     
@@ -298,4 +298,90 @@ insert into Productes value (default, "Wedze", "BOOST 500", 10, default, default
     insert into esquís value (7, "120");
     insert into esquís value (8, "130");
     insert into esquís value (9, "110");
+    
+# Kits #
+
+insert into kits values (1, 1, 5, 7, 115, 2);
+
+# Format #
+
+insert into Format values (1, 1, 50);
+insert into Format values (5, 1, 50);
+insert into Format values (7, 1, 15);
+
+# Lloga_K #
+    
+insert into Lloga_K values (1, "15423675U", "2022/01/14 11:00:00", "2022/01/14 19:00:00");
+
+# Lloga_P #
+
+insert into Lloga_P values (3,"94941664R", "2022/01/14 15:00:00", 40, "2022/01/14 19:00:00");
+insert into Lloga_P values (9,"94941664R", "2022/01/14 15:00:00", 10, "2022/01/14 19:00:00");
+insert into Lloga_P values (4,"81664477H", "2022/01/05 15:00:00", 20, "2022/01/05 19:00:00");      
+    
+
+
+
+######################
+##   PROCEDIMENTS   ##
+######################
+
+DELIMITER //
+
+create procedure lloga_p (in _id int)
+	begin
+		declare _estat boolean;
+        
+        select Estat into _estat
+        from productes;
+        
+        #if _estat then
+        
+        #else
+        
+        #end if;
+        
+        
+    end
+
+//
+
+
+
+DELIMITER //
+
+create procedure desc_prod_marc (in _desc int, in _marca varchar(20))
+	begin
+ 
+		update productes 
+        set Descompte = _desc
+        where Marca = _marca;
+    
+    end
+
+//
+
+##################
+##   Funcions   ##
+##################
+
+
+
+#################
+##   Trigers   ##
+#################
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
