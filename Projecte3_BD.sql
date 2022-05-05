@@ -53,7 +53,7 @@ CREATE TABLE `clients` (
 	`cognom_2` varchar(20) NOT NULL,
 	`tel` INT(9) NOT NULL,
 	`data_naixement` DATE NOT NULL,
-	`correu-e` varchar(50) NOT NULL,
+	`correu_e` varchar(50) NOT NULL,
 	`sexe` varchar(1) NOT NULL,
 	`compte_Bancari` varchar(50) NOT NULL,
 	`usuari` varchar(20) NOT NULL,
@@ -110,6 +110,7 @@ CREATE TABLE `productes` (
 	`descompte` INT NOT NULL default '0',
 	`usos` INT NOT NULL DEFAULT '0',
 	`estat` BOOLEAN NOT NULL DEFAULT true,
+    `foto`  varchar(50) NOT null,
 	PRIMARY KEY (`id`)
 );
 
@@ -161,7 +162,7 @@ CREATE TABLE `lloga_p` (
 	`dni` varchar(9) NOT NULL,
 	`data` DATETIME NOT NULL,
 	`preu_final` INT NOT NULL,
-	`data_tornada` DATETIME NOT NULL,
+	`data_tornada` DATETIME,
 	PRIMARY KEY (`id`,`dni`)
 );
 
@@ -215,9 +216,9 @@ ALTER TABLE `lloga_p` ADD CONSTRAINT `lloga_p_fk1` FOREIGN KEY (`dni`) REFERENCE
 #################
 
 # Monitors #
-insert into monitors value ("78103615P", "Sergi", "Pont", "Balague", 600382677, 25/08/2003, "sergipb@gmail.com");
-insert into monitors value ("12345678J", "Marta", "Moreno", "Rubio", 643125476, 06/04/2000, "martamr@gmail.com");
-insert into monitors value ("56864844G", "Jordi", "Estnañ", "Font", 684212354, 18/10/1990, "jordief@gmail.com");
+insert into monitors value ("78103615P", "Sergi", "Pont", "Balague", 600382677, "2003/08/25", "sergipb@gmail.com");
+insert into monitors value ("12345678J", "Marta", "Moreno", "Rubio", 643125476, "2000/04/06", "martamr@gmail.com");
+insert into monitors value ("56864844G", "Jordi", "Estnañ", "Font", 684212354, "1990/10/18", "jordief@gmail.com");
 
 
 # Cursos #
@@ -232,33 +233,33 @@ insert into cursos value (default, "Acrobacies Basiques", "Curs per comensa amb 
 	insert into individual value (3, 55);
 
 	# Colectiu #
-	insert into colectiu value (2, 30, 10, 05/01/2022);
+	insert into colectiu value (2, 30, 10, "2022/01/03");
 	
 	# Competicio #
-    insert into competicio value (4, 60, 3, 05/01/2022, 07/01/2022, "48:00:00");
-    insert into competicio value (5, 70, 1, 03/01/2022, 07/01/2022, "96:00:00");
+    insert into competicio value (4, 60, 3, "2022/01/03", "2022/01/07", "48:00:00");
+    insert into competicio value (5, 70, 1, "2022/01/03", "2022/01/07", "96:00:00");
 
 
 # Clients #
 
-insert into clients value ("15423675U", "Pau", "Rubio", "Silva", 62378912, 21/03/2003, "paurubiosilva@gmail.com", "M", "ES25 0019 0832 4975 2231 4577", "Prubio", md5("1234"));
-insert into clients value ("94941664R", "Sergi", "Folorencia", "Rotj", 624879216, 03/02/2003, "sergifr@gmail.com", "M", "ES28 6814 4959 7380 2145 2793", "UwU", md5("1234"));
-insert into clients value ("51515482D", "Paula", "Sanchez", "Canosa", 679123574, 19/11/2001, "paulasc@gmail.com", "F", "ES26 0149 3779 6978 6983 9149", "Paulita", md5("1234"));
-insert into clients value ("81664477H", "Paco", "Gimenez", "Gerra", 634897123, 07/05/1970, "pacogg@gmail.com", "M", "ES81 0077 9275 2263 3174 6967", "PacoGG", md5("1234"));
+insert into clients value ("15423675U", "Pau", "Rubio", "Silva", 62378912, "2003/03/21", "paurubiosilva@gmail.com", "M", "ES25 0019 0832 4975 2231 4577", "Prubio", md5("1234"));
+insert into clients value ("94941664R", "Sergi", "Folorencia", "Rotj", 624879216, "2003/02/03", "sergifr@gmail.com", "M", "ES28 6814 4959 7380 2145 2793", "UwU", md5("1234"));
+insert into clients value ("51515482D", "Paula", "Sanchez", "Canosa", 679123574, "2001/11/19", "paulasc@gmail.com", "F", "ES26 0149 3779 6978 6983 9149", "Paulita", md5("1234"));
+insert into clients value ("81664477H", "Paco", "Gimenez", "Gerra", 634897123, "1970/05/07", "pacogg@gmail.com", "M", "ES81 0077 9275 2263 3174 6967", "PacoGG", md5("1234"));
 
 	# Federat #
     
-    insert into federats value ("51515482D", "564694", 22/04/2022, 3);
+    insert into federats value ("51515482D", "564694", "2022/04/22", 3);
     
     # Familia Nombrosa #
     
-	insert into familia_nombrosa value ("81664477H", "69464616476", 22/04/2024);
+	insert into familia_nombrosa value ("81664477H", "69464616476", "2024/04/22");
     
     
 # Curse_I #
 
-insert into curse_i value (1, "94941664R", "04:00:00", 14/01/2022, 30, 140);
-insert into curse_i value (3, "15423675U", "07:00:00", 14/01/2022, 50, 175);
+insert into curse_i value (1, "94941664R", "04:00:00", "2022/01/14", 30, 140);
+insert into curse_i value (3, "15423675U", "07:00:00", "2022/01/14", 50, 175);
 
 # Curse_Col #
 
@@ -271,15 +272,15 @@ insert into curse_com value (4, "51515482D", 60);
 
 # Productes #
 
-insert into productes value (1, "Salomon", "MAX 8", 50, default, 1, default);
-insert into productes value (default, "Atomic", "REDSTER X5", 70, default, default, default);
-insert into productes value (default, "Wedze", "BOOST 580", 40, default, 1, default);
-insert into productes value (default, "Salomon", "QUEST ACCESS 70", 20, default, 1, default);
-insert into productes value (default, "Fischer", "Travers TS", 50, default, 1, default);
-insert into productes value (default, "Wedze", "WID 300", 15, default, default, default);
-insert into productes value (default, "Kerma", "Elite 2", 15, default, 1, default);
-insert into productes value (default, "Inovik", "POLE 900", 20, default, default, default);
-insert into productes value (default, "Wedze", "BOOST 500", 10, default, 1, default);
+insert into productes value (1, "Salomon", "MAX 8", 50, default, 1, default, "esqui-salo.jpeg");
+insert into productes value (default, "Atomic", "REDSTER X5", 70, default, default, default, "esqui-atomic.jpeg");
+insert into productes value (default, "Wedze", "BOOST 580", 40, default, 1, default, "esqui-wedze.jpg");
+insert into productes value (default, "Salomon", "QUEST ACCESS 70", 20, default, 1, default, "botes-salo.jpg");
+insert into productes value (default, "Fischer", "Travers TS", 50, default, 1, default, "botes-travers.jpg");
+insert into productes value (default, "Wedze", "WID 300", 15, default, default, default, "botes-wedze.jpg");
+insert into productes value (default, "Kerma", "Elite 2", 15, default, 1, default, "pal-elite.jpeg");
+insert into productes value (default, "Inovik", "POLE 900", 20, default, default, default, "palo-pole.jpeg");
+insert into productes value (default, "Wedze", "BOOST 500", 10, default, 1, default, "palo-wedze.jpg");
 
 	# Esquís #
     
@@ -328,19 +329,36 @@ insert into lloga_p values (4,"81664477H", "2022/01/05 15:00:00", 20, "2022/01/0
 
 DELIMITER //
 
-create procedure lloga_p (in _id int)
+create procedure lloga_p (in _id int, in _dni varchar(9))
 	begin
-		declare _estat boolean;
+		declare _preu int;
+        declare _desc int;
+        declare _usos int;
+		declare _preuFinal int;
         
-        select Estat into _estat
-        from productes;
+		select preu into _preu
+		from productes
+		where id = _id;
+	
+		select descompte into _desc
+		from productes
+		where id = _id;
         
-        #if _estat then
+        set _preuFinal = _preu - ((_preu * _desc) / 100);
         
-        #else
+        insert into lloga_p (id, dni, data, preu_final) value (_id, _dni, localtime(), _preuFinal);
         
-        #end if;
+        update productes set usos = (usos+1) where id = _id;
         
+		select usos into _usos
+		from productes
+		where id = _id;
+        
+        if _usos >= 10 then
+        
+			update productes set estat = false where id = _id;
+		
+		end if;
         
     end
 
@@ -354,12 +372,13 @@ create procedure desc_prod_marc (in _desc int, in _marca varchar(20))
 	begin
  
 		update productes 
-        set Descompte = _desc
-        where Marca = _marca;
+        set descompte = _desc
+        where marca = _marca;
     
     end
 
 //
+
 
 ##################
 ##   Funcions   ##
@@ -370,9 +389,7 @@ create procedure desc_prod_marc (in _desc int, in _marca varchar(20))
 #################
 ##   Trigers   ##
 #################
-    
 
-    
     
     
     
