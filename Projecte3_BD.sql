@@ -134,19 +134,17 @@ CREATE TABLE `esquís` (
 
 CREATE TABLE `kits` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`id_p1` INT NOT NULL,
-	`id_p2` INT NOT NULL,
-	`id_p3` INT NOT NULL,
-	`preu` INT NOT NULL,
 	`usos` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `format` (
-	`id_p` INT NOT NULL,
-	`id_k` INT NOT NULL,
+    `id_p1` INT NOT NULL,
+    `id_p2` INT NOT NULL,
+    `id_p3` INT NOT NULL,
+    `id_k` INT NOT NULL,
 	`preu_final` INT NOT NULL,
-	PRIMARY KEY (`id_p`,`id_k`)
+    PRIMARY KEY (`id_p1` , `id_p2` , `id_p3` , `id_k`)
 );
 
 CREATE TABLE `lloga_k` (
@@ -197,9 +195,13 @@ ALTER TABLE `pals` ADD CONSTRAINT `pals_fk0` FOREIGN KEY (`id`) REFERENCES `prod
 
 ALTER TABLE `esquís` ADD CONSTRAINT `esquís_fk0` FOREIGN KEY (`id`) REFERENCES `productes`(`id`);
 
-ALTER TABLE `format` ADD CONSTRAINT `format_fk0` FOREIGN KEY (`id_p`) REFERENCES `productes`(`id`);
+ALTER TABLE `format` ADD CONSTRAINT `format_fk1` FOREIGN KEY (`id_p1`) REFERENCES `productes`(`id`);
 
-ALTER TABLE `format` ADD CONSTRAINT `format_fk1` FOREIGN KEY (`id_k`) REFERENCES `kits`(`id`);
+ALTER TABLE `format` ADD CONSTRAINT `format_fk2` FOREIGN KEY (`id_p2`) REFERENCES `productes`(`id`);
+
+ALTER TABLE `format` ADD CONSTRAINT `format_fk3` FOREIGN KEY (`id_p3`) REFERENCES `productes`(`id`);
+
+ALTER TABLE `format` ADD CONSTRAINT `format_fk0` FOREIGN KEY (`id_k`) REFERENCES `kits`(`id`);
 
 ALTER TABLE `lloga_k` ADD CONSTRAINT `lloga_k_fk0` FOREIGN KEY (`id`) REFERENCES `kits`(`id`);
 
@@ -302,13 +304,11 @@ insert into productes value (default, "Wedze", "BOOST 500", 10, default, 1, defa
     
 # Kits #
 
-insert into kits values (1, 1, 5, 7, 115, 1);
+insert into kits values (1, 1);
 
 # Format #
 
-insert into format values (1, 1, 50);
-insert into format values (5, 1, 50);
-insert into format values (7, 1, 15);
+insert into format values (1, 5, 7, 1, 115);
 
 # Lloga_K #
     
@@ -365,6 +365,42 @@ create procedure lloga_p (in _id int, in _dni varchar(9))
 //
 
 
+DELIMITER //
+
+create procedure lloga_k (in _id1 int, in _id2 int, in _id2 int, in _dni varchar(9))
+	begin
+		declare _preu int;
+        declare _desc int;
+        declare _usos int;
+		declare _preuFinal int;
+        
+		select preu into _preu
+		from productes
+		where id = _id;
+	
+		select descompte into _desc
+		from productes
+		where id = _id;
+        
+        set _preuFinal = _preu - ((_preu * _desc) / 100);
+        
+        insert into lloga_k (id, dni, data, preu_final) value (_id, _dni, localtime(), _preuFinal);
+        
+        update productes set usos = (usos+1) where id = _id;
+        
+		select usos into _usos
+		from productes
+		where id = _id;
+        
+        if _usos >= 10 then
+        
+			update productes set estat = false where id = _id;
+		
+		end if;
+        
+    end
+
+//
 
 DELIMITER //
 
