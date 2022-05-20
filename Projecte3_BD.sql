@@ -42,7 +42,7 @@ CREATE TABLE `competicio` (
 	`nivell` INT NOT NULL,
 	`data_inici` DATE NOT NULL,
 	`data_fi` DATE NOT NULL,
-	`durada` DATETIME NOT NULL,
+	`durada` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE `clients` (
 CREATE TABLE `federats` (
 	`dni` varchar(9) NOT NULL,
 	`num_fed` INT(20) NOT NULL,
-	`data_caduc` DATE NOT NULL,
+	`data_caduc_f` DATE NOT NULL,
 	`nivell` INT NOT NULL,
 	PRIMARY KEY (`dni`)
 );
@@ -91,14 +91,13 @@ CREATE TABLE `curse_col` (
 CREATE TABLE `curse_com` (
 	`id` INT NOT NULL,
 	`dni` varchar(9) NOT NULL,
-	`preu_final` INT NOT NULL,
 	PRIMARY KEY (`id`,`dni`)
 );
 
 CREATE TABLE `familia_nombrosa` (
 	`dni` varchar(9) NOT NULL,
 	`carnet_fn` varchar(40) NOT NULL,
-	`data_caduc` DATE NOT NULL,
+	`data_caduc_fn` DATE NOT NULL,
 	PRIMARY KEY (`dni`)
 );
 
@@ -238,8 +237,8 @@ insert into cursos value (default, "Acrobacies Basiques", "Curs per comensa amb 
 	insert into colectiu value (2, 30, 10, "2022/01/03");
 	
 	# Competicio #
-    insert into competicio value (4, 60, 3, "2022/01/03", "2022/01/07", "48:00:00");
-    insert into competicio value (5, 70, 1, "2022/01/03", "2022/01/07", "96:00:00");
+    insert into competicio value (4, 60, 3, "2022/01/03", "2022/01/07", "2");
+    insert into competicio value (5, 70, 1, "2022/01/03", "2022/01/07", "4");
 
 
 # Clients #
@@ -270,7 +269,7 @@ insert into curse_col value (2, "15423675U", 0, 90, 3);
 
 # Curse_Com #
 
-insert into curse_com value (4, "51515482D", 60);
+insert into curse_com value (4, "51515482D");
 
 # Productes #
 
@@ -369,20 +368,49 @@ DELIMITER //
 
 create procedure lloga_k (in _id1 int, in _id2 int, in _id2 int, in _dni varchar(9))
 	begin
-		declare _preu int;
-        declare _desc int;
-        declare _usos int;
+		declare _preu1 int;
+		declare _preu2 int;
+		declare _preu3 int;
+        declare _desc1 int;
+        declare _desc2 int;
+        declare _desc3 int;
+        declare _usos1 int;
+        declare _usos2 int;
+        declare _usos3 int;
+		declare _preuFinalP1 int;
+		declare _preuFinalP2 int;
+		declare _preuFinalP3 int;
 		declare _preuFinal int;
         
-		select preu into _preu
+		select preu into _preu1
 		from productes
-		where id = _id;
-	
-		select descompte into _desc
-		from productes
-		where id = _id;
+		where id = _id1;
         
-        set _preuFinal = _preu - ((_preu * _desc) / 100);
+		select preu into _preu2
+		from productes
+		where id = _id2;
+        
+		select preu into _preu3
+		from productes
+		where id = _id3;
+	
+		select descompte into _desc1
+		from productes
+		where id = _id1;
+	
+		select descompte into _desc2
+		from productes
+		where id = _id2;
+	
+		select descompte into _desc3
+		from productes
+		where id = _id3;
+        
+        set _preuFinalP1 = _preu1 - ((_preu1 * _desc1) / 100);
+        set _preuFinalP2 = _preu2 - ((_preu2 * _desc2) / 100);
+        set _preuFinalP3 = _preu3 - ((_preu3 * _desc3) / 100);
+        
+        SET _preuFinal = _preuFinalP1 + _preuFinalP2 + _preuFinalP3;
         
         insert into lloga_k (id, dni, data, preu_final) value (_id, _dni, localtime(), _preuFinal);
         
